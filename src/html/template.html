@@ -1,15 +1,240 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="/src/images/weather.png" />
+    <title>Weather Apps</title>
   </head>
-  <body>
-    <h1>Test</h1>
-    <i class="fa-solid fa-user"></i>
-    <!-- uses solid style -->
-    <i class="fa-brands fa-github-square"></i>
-    <!-- uses brand style -->
+  <body
+    class="grid min-h-screen grid-rows-[max-content_1fr_max-content] bg-gradient-to-b from-sky-800 to-sky-500 font-semibold text-white *:p-8"
+  >
+    <header>
+      <nav class="flex flex-col items-center justify-center gap-4">
+        <div class="logo flex items-center gap-2">
+          <i class="fa-solid fa-cloud"></i>
+          <h1>Weather Apps</h1>
+        </div>
+        <form id="search-bar" class="flex justify-center gap-0">
+          <input
+            class="peer w-3/4 rounded-l-full border-4 border-r-0 border-transparent bg-sky-400 p-2 placeholder-slate-600 transition-colors focus-within:border-y-sky-200 focus-within:border-l-sky-200 focus-within:outline-none"
+            type="text"
+            name="location"
+            id="location"
+            required
+            placeholder="Location Finder"
+          />
+          <button
+            id="change-location"
+            class="-ml-[1px] rounded-r-full border-4 border-l-0 border-transparent bg-sky-400 p-2 transition-colors peer-focus-within:border-y-sky-200 peer-focus-within:border-r-sky-200 peer-focus-within:outline-none"
+          >
+            <i
+              class="fa-solid fa-magnifying-glass-location fa-xl relative right-1"
+            ></i>
+          </button>
+        </form>
+
+        <!-- <h1 class="text-green-400">Location Found</h1> -->
+
+        <!-- <div class="temp-display">
+          <button class="active rounded-full bg-sky-400 px-5 py-2">
+            °C, m/s
+          </button>
+          <button class="rounded-full bg-sky-400 px-5 py-2">°F, mph</button>
+        </div> -->
+      </nav>
+    </header>
+
+    <section class="flex flex-col justify-around gap-y-12 text-center">
+      <div>
+        <h1 id="greeting">Good Afternoon</h1>
+        <p id="current-date" class="text-gray-300">Thursday 15 July 2023</p>
+        <h2 id="current-time">12.30 PM</h2>
+      </div>
+
+      <div class="flex flex-col gap-y-2">
+        <h2 id="main-description" class="">Current Locations</h2>
+        <div class="flex items-center justify-center">
+          <img class="w-20 object-contain" id="main-weather" src="" />
+          <h1 class="text-5xl" id="main-temp">30° C</h1>
+        </div>
+        <div>
+          <h1 id="main-condition">Sunny</h1>
+          <h2 id="main-time-period" class="text-gray-300">Day</h2>
+        </div>
+        <div class="has-tooltip flex items-center justify-center">
+          <span
+            id="main-uv"
+            class="m-auto flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400 text-xl"
+            >3</span
+          >
+          <span
+            id="main-uv-tooltip"
+            class="tooltip top-12 rounded-lg bg-black p-2 text-sm"
+            >UV Scale</span
+          >
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 text-sm *:flex *:flex-col *:gap-y-2">
+        <div class="card">
+          <h2 class="text-lg">Feels Like</h2>
+          <i class="fa-solid fa-temperature-three-quarters fa-3x"></i>
+          <h1 id="main-feels" class="text-3xl">30° C</h1>
+        </div>
+        <div class="card">
+          <h2 class="text-lg">Humidity</h2>
+          <i class="fa-solid fa-droplet fa-3x"></i>
+          <h1 id="main-humidity" class="text-3xl">50%</h1>
+        </div>
+        <div class="card">
+          <h2 class="text-lg">Rain Chance</h2>
+          <i class="fa-solid fa-cloud-rain fa-3x"></i>
+          <h1 id="main-rain-chance" class="text-3xl">5%</h1>
+        </div>
+        <div class="card">
+          <h2 class="text-lg">Wind Speed</h2>
+          <i class="fa-solid fa-wind fa-3x"></i>
+          <h1 id="main-wind-speed" class="text-3xl">20 km/h</h1>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex flex-col justify-around gap-y-6 text-center">
+      <div id="forecast-description">
+        <h1>3 Days Forecast</h1>
+        <h4 class="text-gray-300">Today and 2 More Days</h4>
+      </div>
+
+      <div class="flex justify-center gap-x-3">
+        <button id="forecast-daily-button" class="active">Daily</button>
+        <button id="forecast-hourly-button" class="">Hourly</button>
+      </div>
+
+      <div
+        id="forecast-slide-buttons"
+        class="mb-4 flex hidden items-center justify-center gap-x-1"
+      >
+        <button class="prev relative right-2">❮</button>
+        <span
+          class="active-slider dot pointer inline-block h-3 w-3 rounded-full border-2 border-solid border-white hover:bg-gray-300"
+        ></span>
+        <span
+          class="dot pointer inline-block h-3 w-3 rounded-full border-2 border-solid border-white hover:bg-gray-300"
+        ></span>
+        <span
+          class="dot pointer inline-block h-3 w-3 rounded-full border-2 border-solid border-white hover:bg-gray-300"
+        ></span>
+        <button class="next relative left-2">❯</button>
+      </div>
+
+      <div id="forecast-hourly-slide" class="flex hidden flex-col gap-y-2">
+        <div
+          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
+        >
+          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
+          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end" />
+        </div>
+        <div
+          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
+        >
+          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
+          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end" />
+        </div>
+        <div
+          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
+        >
+          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
+          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end" />
+        </div>
+        <div
+          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
+        >
+          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
+          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end" />
+        </div>
+        <div
+          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
+        >
+          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
+          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end" />
+        </div>
+        <div
+          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
+        >
+          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
+          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end" />
+        </div>
+        <div
+          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
+        >
+          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
+          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end" />
+        </div>
+        <div
+          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
+        >
+          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
+          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end" />
+        </div>
+      </div>
+
+      <div
+        id="forecast-daily-slide"
+        class="active-slide flex hidden flex-col gap-y-8"
+      >
+        <div
+          class="card grid grid-flow-col grid-cols-[1fr_0.7fr_0.3fr] items-start"
+        >
+          <h2 class="daily-forecast-day justify-self-start">Thursday</h2>
+          <div class="flex flex-col items-start">
+            <h2 class="daily-forecast-max-temp text-xl">30° C</h2>
+            <h2 class="daily-forecast-min-temp text-sm text-gray-300">26° C</h2>
+          </div>
+          <img
+            src="#"
+            class="daily-forecast-icon self-center justify-self-end"
+          />
+        </div>
+        <div
+          class="card grid grid-flow-col grid-cols-[1fr_0.7fr_0.3fr] items-start"
+        >
+          <h2 class="daily-forecast-day justify-self-start">Thursday</h2>
+          <div class="flex flex-col items-start">
+            <h2 class="daily-forecast-max-temp text-xl">30° C</h2>
+            <h2 class="daily-forecast-min-temp text-sm text-gray-300">26° C</h2>
+          </div>
+          <img
+            src="#"
+            class="daily-forecast-icon self-center justify-self-end"
+          />
+        </div>
+        <div
+          class="card grid grid-flow-col grid-cols-[1fr_0.7fr_0.3fr] items-start"
+        >
+          <h2 class="daily-forecast-day justify-self-start">Thursday</h2>
+          <div class="flex flex-col items-start">
+            <h2 class="daily-forecast-max-temp text-xl">30° C</h2>
+            <h2 class="daily-forecast-min-temp text-sm text-gray-300">26° C</h2>
+          </div>
+          <img
+            src="#"
+            class="daily-forecast-icon self-center justify-self-end"
+          />
+        </div>
+      </div>
+    </section>
+
+    <footer class="!p-0 !py-6 text-center">
+      Copyright &copy; agahafiz04 <i class="fa-brands fa-github fa-xl"></i>
+    </footer>
   </body>
 </html>
