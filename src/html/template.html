@@ -3,19 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="/src/images/weather.png" />
     <title>Weather Apps</title>
   </head>
   <body
-    class="grid min-h-screen grid-rows-[max-content_1fr_max-content] bg-gradient-to-b from-sky-800 to-sky-500 font-semibold text-white *:p-8"
+    class="relative grid min-h-screen grid-rows-[max-content_1fr_1fr] bg-gradient-to-b from-sky-800 to-sky-500 font-semibold text-white *:p-8 md:*:px-8 md:*:py-6"
   >
     <header>
-      <nav class="flex flex-col items-center justify-center gap-4">
+      <nav
+        class="flex flex-col items-center justify-center gap-4 md:flex-row md:justify-between"
+      >
         <div class="logo flex items-center gap-2">
           <i class="fa-solid fa-cloud"></i>
           <h1>Weather Apps</h1>
         </div>
-        <form id="search-bar" class="flex justify-center gap-0">
+        <form id="search-bar" class="flex justify-center md:justify-end">
           <input
             class="peer w-3/4 rounded-l-full border-4 border-r-0 border-transparent bg-sky-400 p-2 placeholder-slate-600 transition-colors focus-within:border-y-sky-200 focus-within:border-l-sky-200 focus-within:outline-none"
             type="text"
@@ -45,27 +46,37 @@
       </nav>
     </header>
 
-    <section class="flex flex-col justify-around gap-y-12 text-center">
-      <div>
-        <h1 id="greeting">Good Afternoon</h1>
-        <p id="current-date" class="text-gray-300">Thursday 15 July 2023</p>
-        <h2 id="current-time">12.30 PM</h2>
-      </div>
+    <section
+      class="m-auto flex w-full min-w-max max-w-lg flex-col justify-around gap-y-12 md:max-w-full md:flex-row md:justify-between"
+    >
+      <div class="flex flex-col gap-y-2 text-center md:text-start">
+        <div class="mb-10 md:mb-4">
+          <h1 class="text-4xl" id="greeting">Good Afternoon</h1>
+          <p id="current-date" class="text-gray-300">Thursday 15 July 2023</p>
+          <h2 id="current-time">12.30 PM</h2>
+        </div>
 
-      <div class="flex flex-col gap-y-2">
-        <h2 id="main-description" class="">Current Locations</h2>
-        <div class="flex items-center justify-center">
-          <img class="w-20 object-contain" id="main-weather" src="" />
-          <h1 class="text-5xl" id="main-temp">30° C</h1>
+        <h2 id="main-description">Current Locations</h2>
+        <div
+          class="flex items-center justify-center gap-x-2 md:flex-col md:items-start"
+        >
+          <img
+            class="w-20 object-contain md:order-2"
+            id="main-weather"
+            src=""
+          />
+          <h1 class="text-4xl md:order-1" id="main-temp">30° C</h1>
         </div>
         <div>
           <h1 id="main-condition">Sunny</h1>
           <h2 id="main-time-period" class="text-gray-300">Day</h2>
         </div>
-        <div class="has-tooltip flex items-center justify-center">
+        <div
+          class="has-tooltip flex items-center justify-center md:justify-start"
+        >
           <span
             id="main-uv"
-            class="m-auto flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400 text-xl"
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400 text-xl"
             >3</span
           >
           <span
@@ -76,44 +87,58 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-4 text-sm *:flex *:flex-col *:gap-y-2">
+      <div
+        class="grid grid-cols-2 gap-4 text-center *:flex *:flex-col *:gap-y-2 md:h-1/2 md:gap-10 md:text-xl"
+      >
         <div class="card">
-          <h2 class="text-lg">Feels Like</h2>
+          <h3>Feels Like</h3>
           <i class="fa-solid fa-temperature-three-quarters fa-3x"></i>
-          <h1 id="main-feels" class="text-3xl">30° C</h1>
+          <h1 id="main-feels">30° C</h1>
         </div>
         <div class="card">
-          <h2 class="text-lg">Humidity</h2>
+          <h3>Humidity</h3>
           <i class="fa-solid fa-droplet fa-3x"></i>
-          <h1 id="main-humidity" class="text-3xl">50%</h1>
+          <h1 id="main-humidity">50%</h1>
         </div>
         <div class="card">
-          <h2 class="text-lg">Rain Chance</h2>
+          <h3>Rain Chance</h3>
           <i class="fa-solid fa-cloud-rain fa-3x"></i>
-          <h1 id="main-rain-chance" class="text-3xl">5%</h1>
+          <h1 id="main-rain-chance">5%</h1>
         </div>
         <div class="card">
-          <h2 class="text-lg">Wind Speed</h2>
+          <h3>Wind Speed</h3>
           <i class="fa-solid fa-wind fa-3x"></i>
-          <h1 id="main-wind-speed" class="text-3xl">20 km/h</h1>
+          <h1 id="main-wind-speed">20 km/h</h1>
         </div>
       </div>
     </section>
 
-    <section class="flex flex-col justify-around gap-y-6 text-center">
+    <section
+      class="relative m-auto flex w-full min-w-max max-w-md flex-col justify-around gap-y-6 text-center md:max-w-full md:items-start md:gap-y-9 md:text-start md:text-xl"
+    >
       <div id="forecast-description">
-        <h1>3 Days Forecast</h1>
-        <h4 class="text-gray-300">Today and 2 More Days</h4>
+        <h1 class="md:text-3xl">3 Days Forecast</h1>
+        <h4 class="text-gray-300 md:text-lg">Today and 2 More Days</h4>
       </div>
 
       <div class="flex justify-center gap-x-3">
-        <button id="forecast-daily-button" class="active">Daily</button>
-        <button id="forecast-hourly-button" class="">Hourly</button>
+        <button
+          id="forecast-daily-button"
+          class="active rounded-md border-2 border-transparent px-3 py-1 transition-colors"
+        >
+          Daily
+        </button>
+        <button
+          id="forecast-hourly-button"
+          class="rounded-md border-2 border-transparent px-3 py-1 transition-colors"
+        >
+          Hourly
+        </button>
       </div>
 
       <div
         id="forecast-slide-buttons"
-        class="mb-4 flex hidden items-center justify-center gap-x-1"
+        class="mb-4 flex hidden w-full items-center justify-center gap-x-1 md:absolute md:left-[250px] md:top-[128px] md:w-max md:justify-start"
       >
         <button class="prev relative right-2">❮</button>
         <span
@@ -128,107 +153,112 @@
         <button class="next relative left-2">❯</button>
       </div>
 
-      <div id="forecast-hourly-slide" class="flex hidden flex-col gap-y-2">
-        <div
-          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
-        >
-          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
-          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
-          <img src="#" class="hourly-forecast-icon justify-self-end" />
+      <div
+        id="forecast-daily-slide"
+        class="active-slide flex hidden w-full flex-col gap-y-8 *:grid *:grid-flow-col *:grid-cols-[1fr_0.7fr_0.3fr] *:items-start md:min-w-[500px] md:max-w-screen-sm md:flex-row md:*:flex md:*:flex-grow md:*:flex-col md:*:gap-y-4"
+      >
+        <div class="card">
+          <h3 class="daily-forecast-day justify-self-start md:text-2xl">
+            Thursday
+          </h3>
+          <div class="flex flex-col items-start">
+            <h2 class="daily-forecast-max-temp">30° C</h2>
+            <h4 class="daily-forecast-min-temp text-gray-300">26° C</h4>
+          </div>
+          <img
+            src="#"
+            class="daily-forecast-icon self-center md:w-24 md:self-start"
+          />
         </div>
-        <div
-          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
-        >
-          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
-          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
-          <img src="#" class="hourly-forecast-icon justify-self-end" />
+        <div class="card">
+          <h3 class="daily-forecast-day justify-self-start md:text-2xl">
+            Thursday
+          </h3>
+          <div class="flex flex-col items-start">
+            <h2 class="daily-forecast-max-temp">30° C</h2>
+            <h4 class="daily-forecast-min-temp text-gray-300">26° C</h4>
+          </div>
+          <img
+            src="#"
+            class="daily-forecast-icon self-center md:w-24 md:self-start"
+          />
         </div>
-        <div
-          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
-        >
-          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
-          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
-          <img src="#" class="hourly-forecast-icon justify-self-end" />
-        </div>
-        <div
-          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
-        >
-          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
-          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
-          <img src="#" class="hourly-forecast-icon justify-self-end" />
-        </div>
-        <div
-          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
-        >
-          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
-          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
-          <img src="#" class="hourly-forecast-icon justify-self-end" />
-        </div>
-        <div
-          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
-        >
-          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
-          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
-          <img src="#" class="hourly-forecast-icon justify-self-end" />
-        </div>
-        <div
-          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
-        >
-          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
-          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
-          <img src="#" class="hourly-forecast-icon justify-self-end" />
-        </div>
-        <div
-          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
-        >
-          <h2 class="hourly-forecast-time justify-self-start">00:00 PM</h2>
-          <h2 class="hourly-forecast-temp text-xl">30° C</h2>
-          <img src="#" class="hourly-forecast-icon justify-self-end" />
+        <div class="card">
+          <h3 class="daily-forecast-day justify-self-start md:text-2xl">
+            Thursday
+          </h3>
+          <div class="flex flex-col items-start">
+            <h2 class="daily-forecast-max-temp">30° C</h2>
+            <h4 class="daily-forecast-min-temp text-gray-300">26° C</h4>
+          </div>
+          <img
+            src="#"
+            class="daily-forecast-icon self-center md:w-24 md:self-start"
+          />
         </div>
       </div>
 
       <div
-        id="forecast-daily-slide"
-        class="active-slide flex hidden flex-col gap-y-8"
+        id="forecast-hourly-slide"
+        class="flex hidden w-full flex-col gap-y-2 *:grid *:grid-flow-col *:grid-cols-[0.7fr_0.6fr_0.5fr] *:items-start md:max-w-screen-2xl md:flex-row md:*:flex md:*:flex-grow md:*:flex-col md:*:gap-y-8"
       >
-        <div
-          class="card grid grid-flow-col grid-cols-[1fr_0.7fr_0.3fr] items-start"
-        >
-          <h2 class="daily-forecast-day justify-self-start">Thursday</h2>
-          <div class="flex flex-col items-start">
-            <h2 class="daily-forecast-max-temp text-xl">30° C</h2>
-            <h2 class="daily-forecast-min-temp text-sm text-gray-300">26° C</h2>
-          </div>
-          <img
-            src="#"
-            class="daily-forecast-icon self-center justify-self-end"
-          />
+        <div class="card">
+          <h2 class="hourly-forecast-time justify-self-start lg:text-2xl">
+            00:00 PM
+          </h2>
+          <h2 class="hourly-forecast-temp">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end lg:w-20" />
+        </div>
+        <div class="card">
+          <h2 class="hourly-forecast-time justify-self-start lg:text-2xl">
+            00:00 PM
+          </h2>
+          <h2 class="hourly-forecast-temp">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end lg:w-20" />
+        </div>
+        <div class="card">
+          <h2 class="hourly-forecast-time justify-self-start lg:text-2xl">
+            00:00 PM
+          </h2>
+          <h2 class="hourly-forecast-temp">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end lg:w-20" />
+        </div>
+        <div class="card">
+          <h2 class="hourly-forecast-time justify-self-start lg:text-2xl">
+            00:00 PM
+          </h2>
+          <h2 class="hourly-forecast-temp">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end lg:w-20" />
+        </div>
+        <div class="card">
+          <h2 class="hourly-forecast-time justify-self-start lg:text-2xl">
+            00:00 PM
+          </h2>
+          <h2 class="hourly-forecast-temp">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end lg:w-20" />
+        </div>
+        <div class="card">
+          <h2 class="hourly-forecast-time justify-self-start lg:text-2xl">
+            00:00 PM
+          </h2>
+          <h2 class="hourly-forecast-temp">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end lg:w-20" />
+        </div>
+        <div class="card">
+          <h2 class="hourly-forecast-time justify-self-start lg:text-2xl">
+            00:00 PM
+          </h2>
+          <h2 class="hourly-forecast-temp">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end lg:w-20" />
         </div>
         <div
-          class="card grid grid-flow-col grid-cols-[1fr_0.7fr_0.3fr] items-start"
+          class="card grid grid-flow-col grid-cols-[0.7fr_0.6fr_0.5fr] items-start"
         >
-          <h2 class="daily-forecast-day justify-self-start">Thursday</h2>
-          <div class="flex flex-col items-start">
-            <h2 class="daily-forecast-max-temp text-xl">30° C</h2>
-            <h2 class="daily-forecast-min-temp text-sm text-gray-300">26° C</h2>
-          </div>
-          <img
-            src="#"
-            class="daily-forecast-icon self-center justify-self-end"
-          />
-        </div>
-        <div
-          class="card grid grid-flow-col grid-cols-[1fr_0.7fr_0.3fr] items-start"
-        >
-          <h2 class="daily-forecast-day justify-self-start">Thursday</h2>
-          <div class="flex flex-col items-start">
-            <h2 class="daily-forecast-max-temp text-xl">30° C</h2>
-            <h2 class="daily-forecast-min-temp text-sm text-gray-300">26° C</h2>
-          </div>
-          <img
-            src="#"
-            class="daily-forecast-icon self-center justify-self-end"
-          />
+          <h2 class="hourly-forecast-time justify-self-start lg:text-2xl">
+            00:00 PM
+          </h2>
+          <h2 class="hourly-forecast-temp">30° C</h2>
+          <img src="#" class="hourly-forecast-icon justify-self-end lg:w-20" />
         </div>
       </div>
     </section>
@@ -236,5 +266,18 @@
     <footer class="!p-0 !py-6 text-center">
       Copyright &copy; agahafiz04 <i class="fa-brands fa-github fa-xl"></i>
     </footer>
+
+    <div
+      id="loading"
+      class="overlay absolute hidden h-full w-full bg-white/30 backdrop-blur-sm"
+    >
+      <div
+        class="absolute bottom-0 left-0 right-0 top-0 m-auto h-14 w-14 animate-spin rounded-full border-[5px] border-solid border-white border-t-black"
+      ></div>
+    </div>
+
+    <div class="absolute z-[-1] h-full w-full !p-0 opacity-20">
+      <img id="background-image" class="h-full w-full object-cover" src="#" />
+    </div>
   </body>
 </html>

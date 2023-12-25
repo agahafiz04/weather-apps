@@ -11,6 +11,7 @@ import {
   dotButtonEl,
   hourlySlidesButtonEl,
   hourlySlidesEl,
+  loader,
 } from "./dom-generator.js";
 import { getWeather, getLocation, convertLocation } from "./fetch.js";
 
@@ -29,8 +30,6 @@ export async function location() {
 }
 
 export function changeWeather(location) {
-  console.log(location);
-
   getWeather(location)
     .then((weatherData) => {
       currentLocation = weatherData;
@@ -80,8 +79,6 @@ export const sliderChange = changeSlider();
 function changeSlider() {
   function currentSlide() {
     let index = indexChange.getIndex();
-
-    console.log(currentLocation);
     changeHourlyForecastInfo(currentLocation, index);
   }
 
@@ -97,4 +94,16 @@ function changeSlider() {
   }
 
   return { currentSlide, nextSlide };
+}
+
+export function displayLoading() {
+  loader.classList.add("display-loading");
+
+  setTimeout(() => {
+    loader.classList.remove("display-loading");
+  }, 15000);
+}
+
+export function hideLoading() {
+  loader.classList.remove("display-loading");
 }

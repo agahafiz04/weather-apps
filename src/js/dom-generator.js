@@ -2,6 +2,12 @@
 /* eslint-disable import/prefer-default-export */
 
 import { format } from "date-fns";
+import nightImage from "../images/night.jpg";
+import morningImage from "../images/morning.jpg";
+import afternoonImage from "../images/afternoon.jpg";
+
+// Loading API Fetch
+export const loader = document.querySelector("#loading");
 
 // Searchbar
 export const searchForm = document.querySelector("#search-bar");
@@ -59,16 +65,33 @@ export const hourlyForecastButtonEl = document.querySelector(
   "#forecast-hourly-button",
 );
 
+export const forecastDescriptionEl = document.querySelector(
+  "#forecast-description",
+);
+
+// Background Image
+const backgroundImageEl = document.querySelector("#background-image");
+
 export function changeGreetings(weatherData) {
   const currentCompleteDate = weatherData.location.localtime;
 
   const currentDate = currentCompleteDate.slice(0, 10);
   const convertDate = format(currentDate, "EEEE d LLLL yyyy");
-  const currentTime = currentCompleteDate.substring(11);
+  // const currentTime = currentCompleteDate.substring(11);
 
   currentDateEl.textContent = convertDate;
 
-  const greetingTime = currentCompleteDate.slice(11, 13);
+  let greetingTime = currentCompleteDate.substring(11, 13);
+
+  const today = new Date();
+  let h = today.getHours();
+  let m = today.getMinutes();
+
+  let currentTime = `${h}:${m}`;
+
+  if (greetingTime.length < 2) {
+    greetingTime = "0" + greetingTime;
+  }
 
   if (greetingTime >= 0 && greetingTime < 12) {
     currentTimeEl.textContent = currentTime + " AM";
@@ -78,10 +101,13 @@ export function changeGreetings(weatherData) {
 
   if (greetingTime >= 0 && greetingTime < 12) {
     greetingEl.textContent = "Good Morning";
+    backgroundImageEl.src = morningImage;
   } else if (greetingTime >= 12 && greetingTime < 18) {
     greetingEl.textContent = "Good Afternoon";
+    backgroundImageEl.src = afternoonImage;
   } else if (greetingTime >= 18 && greetingTime < 24) {
     greetingEl.textContent = "Good Evening";
+    backgroundImageEl.src = nightImage;
   }
 }
 
@@ -89,7 +115,7 @@ export function changeMainLocationTempInfo(weatherData) {
   const tempDisplay = [" °C", " °F"];
   const currentData = weatherData.current;
 
-  mainDescriptionEl.innerHTML = `${weatherData.location.name}, ${weatherData.location.region} </br> ${weatherData.location.country}`;
+  mainDescriptionEl.innerHTML = `${weatherData.location.name}, ${weatherData.location.region}`;
   mainImageEl.src = currentData.condition.icon;
   mainConditionEl.textContent = currentData.condition.text;
   mainTempEl.textContent = currentData.temp_c + tempDisplay[0];
@@ -106,7 +132,7 @@ export function changeMainLocationTempInfo(weatherData) {
     uvEl.style.backgroundColor = "lightgreen";
     uvTooltipEl.textContent = "UV Scale Low";
   } else if (currentData.uv >= 3 && currentData.uv <= 5) {
-    uvEl.style.backgroundColor = "yellow";
+    uvEl.style.backgroundColor = "rgb(224, 224, 73)";
     uvTooltipEl.textContent = "UV Scale Moderate";
   } else if (currentData.uv >= 6 && currentData.uv <= 7) {
     uvEl.style.backgroundColor = "orange";
@@ -198,12 +224,19 @@ export function changeForecastDisplay(display) {
       dailySlidesEl.classList.add("active-slide");
       hourlySlidesEl.classList.remove("active-slide");
       hourlySlidesButtonEl.classList.remove("active-slide");
+
+      forecastDescriptionEl.children[0].textContent = "3 Days Forecast";
+      forecastDescriptionEl.children[1].textContent =
+        "Today and the day after tomorrow";
       break;
 
     case "hourly":
       dailySlidesEl.classList.remove("active-slide");
       hourlySlidesEl.classList.add("active-slide");
       hourlySlidesButtonEl.classList.add("active-slide");
+
+      forecastDescriptionEl.children[0].textContent = "Today Hourly Forecast";
+      forecastDescriptionEl.children[1].textContent = "24 Hours full forecast";
       break;
 
     default:

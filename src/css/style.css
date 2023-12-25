@@ -28,12 +28,17 @@
   /* .active {
     @apply border-4 border-solid border-white transition-colors;
   } */
+
+  .display-loading {
+    @apply !block;
+  }
+
   .active-slider {
     @apply bg-white;
   }
 
   .active {
-    @apply rounded-md border-2 border-solid border-white px-3 py-1 transition-colors;
+    @apply !border-white;
   }
 
   .active-slide {
@@ -45,7 +50,7 @@
   }
 
   .has-tooltip:hover .tooltip {
-    @apply visible z-50;
+    @apply visible z-30;
   }
 
   .has-tooltip {

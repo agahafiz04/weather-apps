@@ -1,17 +1,21 @@
+import { displayLoading, hideLoading } from ".";
+
 export async function getWeather(currentLoc) {
   try {
+    displayLoading();
     const fetchApi = await fetch(
       `https://api.weatherapi.com/v1/forecast.json?key=444a0f30839a4b4a82860048231412&q=${currentLoc}&days=3&aqi=yes&alerts=yes`,
       { mode: "cors" },
     );
     const weatherData = await fetchApi.json();
-    console.log(weatherData);
 
     if (fetchApi.status === 200) {
+      hideLoading();
       return weatherData;
     }
     throw weatherData.error;
   } catch (error) {
+    hideLoading();
     console.log(error.message);
   }
 
@@ -37,7 +41,6 @@ export async function convertLocation(latitude, longitude) {
     const locationData = await fetchApi.json();
 
     if (fetchApi.status === 200) {
-      console.log(locationData);
       return locationData;
     }
     throw locationData.description;
