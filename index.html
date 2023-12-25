@@ -4,11 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Apps</title>
-    <link rel="icon" href="favicon.png" />
-    <script defer src="bundle.js"></script>
-  </head>
+  <link rel="icon" href="favicon.png"><script defer src="bundle.js"></script></head>
   <body
-    class="body-image relative grid min-h-screen grid-rows-[max-content_1fr_max-content] bg-gradient-to-b from-sky-800 to-sky-500 font-semibold text-white *:p-8 md:*:px-8 md:*:py-6"
+    class="relative grid min-h-screen grid-rows-[max-content_1fr_1fr] bg-gradient-to-b from-sky-800 to-sky-500 font-semibold text-white *:p-8 md:*:px-8 md:*:py-6"
   >
     <header>
       <nav
@@ -160,7 +158,7 @@
         class="active-slide flex hidden w-full flex-col gap-y-8 *:grid *:grid-flow-col *:grid-cols-[1fr_0.7fr_0.3fr] *:items-start md:min-w-[500px] md:max-w-screen-sm md:flex-row md:*:flex md:*:flex-grow md:*:flex-col md:*:gap-y-4"
       >
         <div class="card">
-          <h3 class="daily-forecast-day justify-self-start md:text-xl">
+          <h3 class="daily-forecast-day justify-self-start md:text-2xl">
             Thursday
           </h3>
           <div class="flex flex-col items-start">
@@ -173,7 +171,7 @@
           />
         </div>
         <div class="card">
-          <h3 class="daily-forecast-day justify-self-start md:text-xl">
+          <h3 class="daily-forecast-day justify-self-start md:text-2xl">
             Thursday
           </h3>
           <div class="flex flex-col items-start">
@@ -186,7 +184,7 @@
           />
         </div>
         <div class="card">
-          <h3 class="daily-forecast-day justify-self-start md:text-xl">
+          <h3 class="daily-forecast-day justify-self-start md:text-2xl">
             Thursday
           </h3>
           <div class="flex flex-col items-start">
@@ -278,8 +276,8 @@
       ></div>
     </div>
 
-    <div class="background-image absolute h-full w-full">
-      <!-- <img class="bg-cover" src="/morning.jpg" /> -->
+    <div class="absolute z-[-1] h-full w-full !p-0 opacity-20">
+      <img id="background-image" class="h-full w-full object-cover" src="#" />
     </div>
   </body>
 </html>
