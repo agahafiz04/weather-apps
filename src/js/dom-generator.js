@@ -77,23 +77,25 @@ export function changeGreetings(weatherData) {
 
   const currentDate = currentCompleteDate.slice(0, 10);
   const convertDate = format(currentDate, "EEEE d LLLL yyyy");
-  // const currentTime = currentCompleteDate.substring(11);
+  const currentTime = currentCompleteDate.substring(11);
+  const greetingTime = currentCompleteDate.substring(11, 12);
 
   currentDateEl.textContent = convertDate;
+  // const today = new Date();
+  // let h = today.getHours();
+  // let m = today.getMinutes();
 
-  let greetingTime = currentCompleteDate.substring(11, 13);
+  // let currentTime = `${h}:${m}`;
+  // console.log(greetingTime);
+  // console.log(currentTime);
 
-  const today = new Date();
-  let h = today.getHours();
-  let m = today.getMinutes();
+  // if (greetingTime.length < 2) {
+  //   greetingTime = "0" + greetingTime;
+  // }
 
-  let currentTime = `${h}:${m}`;
-
-  if (greetingTime.length < 2) {
-    greetingTime = "0" + greetingTime;
-  }
-
-  if (greetingTime >= 0 && greetingTime < 12) {
+  if (greetingTime < 10) {
+    currentTimeEl.textContent = "0" + currentTime + " AM";
+  } else if (greetingTime >= 0 && greetingTime < 12) {
     currentTimeEl.textContent = currentTime + " AM";
   } else if (greetingTime >= 12 && greetingTime < 24) {
     currentTimeEl.textContent = currentTime + " PM";
