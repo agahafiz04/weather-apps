@@ -7,10 +7,7 @@ import {
   changeHourlyForecastInfo,
   changeMainExtraInfo,
   changeMainLocationTempInfo,
-  dailySlidesEl,
   dotButtonEl,
-  hourlySlidesButtonEl,
-  hourlySlidesEl,
   loader,
 } from "./dom-generator.js";
 import { getWeather, getLocation, convertLocation } from "./fetch.js";

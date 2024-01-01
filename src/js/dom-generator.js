@@ -77,7 +77,7 @@ export function changeGreetings(weatherData) {
 
   const currentDate = currentCompleteDate.slice(0, 10);
   const convertDate = format(currentDate, "EEEE d LLLL yyyy");
-  const currentTime = currentCompleteDate.substring(11);
+  // const currentTime = currentCompleteDate.substring(11);
   const greetingTime = currentCompleteDate.substring(11, 12);
 
   currentDateEl.textContent = convertDate;
@@ -93,13 +93,13 @@ export function changeGreetings(weatherData) {
   //   greetingTime = "0" + greetingTime;
   // }
 
-  if (greetingTime < 10) {
-    currentTimeEl.textContent = "0" + currentTime + " AM";
-  } else if (greetingTime >= 0 && greetingTime < 12) {
-    currentTimeEl.textContent = currentTime + " AM";
-  } else if (greetingTime >= 12 && greetingTime < 24) {
-    currentTimeEl.textContent = currentTime + " PM";
-  }
+  // if (greetingTime < 10) {
+  //   currentTimeEl.textContent = "0" + currentTime + " AM";
+  // } else if (greetingTime >= 0 && greetingTime < 12) {
+  //   currentTimeEl.textContent = currentTime + " AM";
+  // } else if (greetingTime >= 12 && greetingTime < 24) {
+  //   currentTimeEl.textContent = currentTime + " PM";
+  // }
 
   if (greetingTime >= 0 && greetingTime < 12) {
     greetingEl.textContent = "Good Morning";
